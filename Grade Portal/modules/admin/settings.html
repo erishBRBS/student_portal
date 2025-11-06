@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STI Admin Portal - Settings</title>
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="modules/css/settings.css">
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="logo-container">
+      <div class="logo">STI</div>
+      <div class="logo-text">STI Admin Portal</div>
+    </div>
+    
+    <div class="user-info">
+      <div class="user-avatar">AU</div>
+      <div class="user-details">
+        <div class="user-name">Admin User</div>
+        <div class="user-role">STI Admin</div>
+      </div>
+    </div>
+    
+    <div class="nav-menu">
+      <a href="dashboard.html" class="nav-item">
+        <i class="fas fa-home"></i>
+        <span>Dashboard</span>
+      </a>
+      <a href="records-management.html" class="nav-item">
+        <i class="fas fa-users"></i>
+        <span>Records Management</span>
+      </a>
+      <a href="grades-management.html" class="nav-item">
+        <i class="fas fa-book"></i>
+        <span>Grades Management</span>
+      </a>
+      <a href="schedule-management.html" class="nav-item">
+        <i class="fas fa-clock"></i>
+        <span>Schedule Management</span>
+      </a>
+    
+      <div class="nav-section">Communication</div>
+      <a href="announcements.html" class="nav-item">
+        <i class="fas fa-bullhorn"></i>
+        <span>Announcements</span>
+      </a>
+
+      <div class="nav-section">Data Management</div>
+      <a href="data-management.html" class="nav-item">
+        <i class="fas fa-database"></i>
+        <span>Data Management</span>
+      </a>
+      
+      <div class="nav-section">Others</div>
+      <a href="settings.html" class="nav-item active">
+        <i class="fas fa-cog"></i>
+        <span>Admin Settings</span>
+      </a>
+      <a href="Logout.html" class="nav-item">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Header -->
+    <div class="header">
+      <button class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <div class="page-title">
+        <h1>Admin Settings</h1>
+        <p>Manage your profile and system preferences</p>
+      </div>
+      
+      <div class="header-actions">
+        <div class="search-container">
+          <i class="fas fa-search search-icon"></i>
+          <input type="text" class="search-input" placeholder="Quick search..." id="quickSearch">
+        </div>
+        
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <i class="fas fa-moon" id="themeIcon"></i>
+        </button>
+        
+        <div class="notification-btn" id="notificationBtn">
+          <i class="fas fa-bell"></i>
+          <span class="notification-badge">3</span>
+        </div>
+        
+        <div class="admin-profile">
+          <div class="admin-avatar">AU</div>
+          <div>Admin User</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard">
+      <!-- Alert Messages -->
+      <div id="alertContainer"></div>
+      
+      <!-- Settings Columns -->
+      <div class="settings-columns">
+        <!-- Profile Settings -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Profile Settings</div>
+            <div class="view-all">Manage your personal information</div>
+          </div>
+          
+          <div class="card-content">
+            <!-- Profile Picture Section -->
+            <div class="profile-picture-container">
+              <div class="profile-picture">
+                <img src="https://via.placeholder.com/150" alt="Profile" class="profile-img" id="profilePreview">
+                <label for="profileUpload" class="profile-overlay">
+                  <i class="fas fa-camera"></i>
+                  <input type="file" id="profileUpload" accept="image/*" style="display: none;">
+                </label>
+              </div>
+              <div class="profile-preview-text">Profile Preview</div>
+            </div>
+            
+            <!-- Profile Form -->
+            <form class="form-grid" id="profileForm">
+              <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" id="fullName" class="form-control" value="Admin User">
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" id="email" class="form-control" value="admin@university.edu">
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label">Mobile Number</label>
+                <input type="tel" id="mobile" class="form-control" value="+63 912 345 6789">
+              </div>
+              
+              <div class="form-group full-width">
+                <div class="action-buttons">
+                  <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Save Profile Changes
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- System Preferences -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">System Preferences</div>
+            <div class="view-all">Customize your experience</div>
+          </div>
+          
+          <div class="card-content">
+            <form class="form-grid" id="preferencesForm">
+              <div class="form-group">
+                <label class="form-label">Theme Preference</label>
+                <select id="theme" class="form-control">
+                  <option value="light">Light Theme</option>
+                  <option value="dark">Dark Theme</option>
+                  <option value="auto">Auto (System Default)</option>
+                </select>
+              </div>
+              
+              <div class="form-group full-width">
+                <div class="toggle-group">
+                  <div class="toggle-label">
+                    <span class="toggle-text">Desktop Notifications</span>
+                    <label class="toggle-switch">
+                      <input type="checkbox" id="desktopNotifications" checked>
+                      <span class="slider"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="form-group full-width">
+                <div class="action-buttons">
+                  <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Save Preferences
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Security Settings -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Security Settings</div>
+            <div class="view-all">Manage your account security</div>
+          </div>
+          
+          <div class="card-content">
+            <form class="form-grid" id="securityForm">
+              <div class="form-group">
+                <label class="form-label">Current Password</label>
+                <input type="password" id="currentPassword" class="form-control" placeholder="Enter current password">
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label">New Password</label>
+                <input type="password" id="newPassword" class="form-control" placeholder="Enter new password">
+                <div class="password-strength">
+                  <div class="password-strength-bar"></div>
+                </div>
+                <div class="password-requirements">
+                  <small>Password must contain at least 8 characters with uppercase, lowercase, numbers, and special characters</small>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label">Confirm New Password</label>
+                <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm new password">
+              </div>
+              
+              <div class="form-group full-width">
+                <div class="toggle-group">
+                  <div class="toggle-label">
+                    <span class="toggle-text">Two-Factor Authentication (2FA)</span>
+                    <label class="toggle-switch">
+                      <input type="checkbox" id="twoFactorAuth">
+                      <span class="slider"></span>
+                    </label>
+                  </div>
+                  
+                  <div class="toggle-label">
+                    <span class="toggle-text">Login Alerts</span>
+                    <label class="toggle-switch">
+                      <input type="checkbox" id="loginAlerts" checked>
+                      <span class="slider"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="form-group full-width">
+                <div class="action-buttons">
+                  <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-shield-alt"></i> Update Security Settings
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Admin Management Section -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Admin Management</div>
+            <div class="view-all">Manage system administrators</div>
+          </div>
+          
+          <div class="card-content">
+            <div class="admin-list-container">
+              <div class="admin-list-filters">
+                <div class="search-container full-width">
+                  <i class="fas fa-search search-icon"></i>
+                  <input type="text" class="search-input" placeholder="Search admins..." id="adminSearch">
+                </div>
+                <button class="btn btn-primary" id="addAdminBtn">
+                  <i class="fas fa-user-plus"></i> Add New Admin
+                </button>
+              </div>
+              
+              <div class="admin-list-tabs">
+                <div class="admin-list-tab active" data-tab="active">Active Admins</div>
+                <div class="admin-list-tab" data-tab="deleted">Deleted Admins</div>
+              </div>
+              
+              <div class="admin-list" id="adminList">
+                <!-- Admin list will be populated by JavaScript -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Admin Modal -->
+  <div class="modal" id="addAdminModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Add New Admin</h3>
+        <button class="modal-close" id="closeAddAdminModal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="addAdminForm" class="admin-form">
+          <div class="form-section">
+            <h4 class="section-title">Admin Information</h4>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Full Name *</label>
+                <input type="text" class="form-control" id="adminFullName" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Email Address *</label>
+                <input type="email" class="form-control" id="adminEmail" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Admin Role *</label>
+                <select class="form-control" id="adminRole" required>
+                  <option value="">Select Role</option>
+                  <option value="super_admin">Super Administrator</option>
+                  <option value="admin">Administrator</option>
+                  <option value="moderator">Moderator</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Add Admin</button>
+            <button type="button" class="btn btn-secondary" id="cancelAddAdmin">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div class="modal" id="deleteAdminModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Confirm Deletion</h3>
+        <button class="modal-close" id="closeDeleteAdminModal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this admin? This action can be undone.</p>
+        <div class="form-actions">
+          <button type="button" class="btn btn-danger" id="confirmDeleteAdmin">Delete Admin</button>
+          <button type="button" class="btn btn-secondary" id="cancelDeleteAdmin">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Restore Confirmation Modal -->
+  <div class="modal" id="restoreAdminModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Restore Admin</h3>
+        <button class="modal-close" id="closeRestoreAdminModal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to restore this admin account?</p>
+        <div class="form-actions">
+          <button type="button" class="btn btn-success" id="confirmRestoreAdmin">Restore Admin</button>
+          <button type="button" class="btn btn-secondary" id="cancelRestoreAdmin">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Files -->
+  <script src="modules/js/settings.js"></script>
+</body>
+</html>

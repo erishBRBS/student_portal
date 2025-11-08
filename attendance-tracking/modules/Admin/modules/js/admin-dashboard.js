@@ -1,8 +1,8 @@
 // Admin Dashboard JavaScript
 class AdminDashboard {
     constructor() {
-        this.token = null; // 🔹 Store auth token
-        this.user = null;  // 🔹 Store user details
+        this.token = null;
+        this.user = null;
         this.init();
     }
 

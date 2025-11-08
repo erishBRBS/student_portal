@@ -157,7 +157,7 @@ if (loginForm) {
       case "admin":
         loginUrl = `${API_BASE_URL}${ADMIN_LOGIN_ENDPOINT}`;
         redirectPath =
-          "../../../Attendance Tracking/modules/Admin/admin-dashboard.html";
+          "../../../attendance-tracking/modules/Admin/admin-dashboard.html";
         break;
       case "student":
         loginUrl = `${API_BASE_URL}${STUDENT_LOGIN_ENDPOINT}`;

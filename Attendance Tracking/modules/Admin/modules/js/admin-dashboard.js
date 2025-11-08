@@ -156,3 +156,7 @@ class AdminDashboard {
 if (typeof window !== 'undefined') {
     window.AdminDashboard = AdminDashboard;
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    new AdminDashboard();
+});

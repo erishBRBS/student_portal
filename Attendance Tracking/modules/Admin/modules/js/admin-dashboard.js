@@ -1,15 +1,69 @@
 // Admin Dashboard JavaScript
 class AdminDashboard {
     constructor() {
+        this.token = null; // 🔹 Store auth token
+        this.user = null;  // 🔹 Store user details
         this.init();
     }
 
     init() {
+        this.loadAuthData(); // 🔹 Load token & user first
         this.bindEvents();
         console.log('Admin Dashboard initialized!');
         
-        // Show welcome alert
-        AlertManager.info('Welcome to Admin Dashboard! System is running smoothly.');
+        // Show welcome alert if logged in
+        if (this.user) {
+            AlertManager.info(`Welcome ${this.user.first_name || 'Admin'}! System is running smoothly.`);
+        } else {
+            AlertManager.info('Welcome to Admin Dashboard! System is running smoothly.');
+        }
+
+        // Optional: Fetch dashboard data using token
+        this.fetchDashboardData();
+    }
+
+    // 🔹 Retrieve saved token & user from localStorage
+    loadAuthData() {
+        this.token = localStorage.getItem('authToken');
+        const userData = localStorage.getItem('currentUser');
+        this.user = userData ? JSON.parse(userData) : null;
+
+        if (!this.token) {
+            AlertManager.warning('You are not logged in. Redirecting to login...');
+            setTimeout(() => {
+                window.location.href = '/index.html';
+            }, 2000);
+        } else {
+            console.log('✅ Auth Token Loaded:', this.token);
+            console.log('👤 Current User:', this.user);
+        }
+    }
+
+    // 🔹 Example API call using stored token
+    async fetchDashboardData() {
+        if (!this.token) return;
+
+        try {
+            const response = await axios.get('https://dit-rfid.arvin-stg.org/api/v1/admin/dashboard', {
+                headers: {
+                    Authorization: `Bearer ${this.token}`,
+                },
+            });
+
+            console.log('📊 Dashboard data:', response.data);
+        } catch (error) {
+            console.error('Error fetching dashboard data:', error);
+            if (error.response && error.response.status === 401) {
+                AlertManager.error('Session expired. Please log in again.');
+                localStorage.removeItem('authToken');
+                localStorage.removeItem('currentUser');
+                setTimeout(() => {
+                    window.location.href = '/index.html';
+                }, 2000);
+            } else {
+                AlertManager.error('Failed to load dashboard data.');
+            }
+        }
     }
 
     bindEvents() {
@@ -39,7 +93,6 @@ class AdminDashboard {
         const actions = {
             attendance: () => {
                 AlertManager.info('Opening Attendance Management...');
-                // Simulate navigation delay
                 setTimeout(() => {
                     window.location.href = 'admin-attendance.html';
                 }, 1000);
@@ -71,7 +124,6 @@ class AdminDashboard {
     handleStatCardClick(card) {
         const statLabel = card.querySelector('.stat-label').textContent;
         const statValue = card.querySelector('.stat-value').textContent;
-        
         AlertManager.info(`Viewing details for: ${statLabel} (${statValue})`);
     }
 

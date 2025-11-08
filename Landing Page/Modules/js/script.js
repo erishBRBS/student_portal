@@ -96,7 +96,7 @@ function performClientSideLogout() {
   checkLoginStatus();
 
   // 3. Redirect to landing page
-  // window.location.href = '/index.html';
+  window.location.href = '/index.html';
 }
 
 // Attach logout handler to the button
@@ -218,7 +218,7 @@ if (loginForm) {
         checkLoginStatus();
 
         // 3. Redirect to the determined dashboard path
-        // window.location.href = redirectPath;
+        window.location.href = redirectPath;
       } else {
         throw new Error(
           "Login failed: Server response is incomplete or missing token."

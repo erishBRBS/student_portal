@@ -203,7 +203,10 @@
                     <option>Computer Science</option>
                     <option>Information Technology</option>
                     <option>Business Administration</option>
-                    <option>Engineering</option>
+                    <option>ICT</option>
+                    <option>STEM</option>
+                    <option>HUMMS</option>
+
                   </select>
                 </div>
                 
@@ -471,7 +474,7 @@
       <div class="modal-body">
         <form id="addStudentForm" class="student-form">
           <div class="form-section">
-            <h4 class="section-title">Personal Information</h4>
+            <h4 class="section-title">Student Information</h4>
             <div class="form-grid">
               <div class="form-group">
                 <label class="form-label">First Name *</label>
@@ -482,65 +485,8 @@
                 <input type="text" class="form-control" id="lastName" required>
               </div>
               <div class="form-group">
-                <label class="form-label">Middle Name</label>
-                <input type="text" class="form-control" id="middleName">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Date of Birth *</label>
-                <input type="date" class="form-control" id="dob" required>
-              </div>
-              <div class="form-group">
-                <label class="form-label">Gender *</label>
-                <select class="form-control" id="gender" required>
-                  <option value="">Select Gender</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label class="form-label">Civil Status</label>
-                <select class="form-control" id="civilStatus">
-                  <option value="single">Single</option>
-                  <option value="married">Married</option>
-                  <option value="divorced">Divorced</option>
-                  <option value="widowed">Widowed</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-section">
-            <h4 class="section-title">Contact Information</h4>
-            <div class="form-grid">
-              <div class="form-group">
-                <label class="form-label">Email Address *</label>
-                <input type="email" class="form-control" id="email" required>
-              </div>
-              <div class="form-group">
-                <label class="form-label">Phone Number *</label>
-                <input type="tel" class="form-control" id="phone" required>
-              </div>
-              <div class="form-group full-width">
-                <label class="form-label">Address *</label>
-                <textarea class="form-control" id="address" rows="3" required></textarea>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-section">
-            <h4 class="section-title">Academic Information</h4>
-            <div class="form-grid">
-              <div class="form-group">
                 <label class="form-label">Student ID *</label>
-                <input type="text" class="form-control" id="studentId" placeholder="Auto-generated if empty">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Education Level *</label>
-                <select class="form-control" id="educationLevel" required>
-                  <option value="">Select Level</option>
-                  <option value="senior-high">Senior High</option>
-                  <option value="college">College</option>
-                </select>
+                <input type="text" class="form-control" id="studentId" required>
               </div>
               <div class="form-group">
                 <label class="form-label">Course *</label>
@@ -549,13 +495,19 @@
                   <option value="cs">Computer Science</option>
                   <option value="it">Information Technology</option>
                   <option value="ba">Business Administration</option>
-                  <option value="eng">Engineering</option>
+                  <option value="eng">Tourism Management</option>
+                  <option value="ict">ICT</option>
+                  <option value="stem">STEM</option>
+                  <option value="abm">ABM</option>
+                  <option value="humms">HUMMS</option>
                 </select>
               </div>
               <div class="form-group">
                 <label class="form-label">Year Level *</label>
                 <select class="form-control" id="yearLevel" required>
                   <option value="">Select Year</option>
+                  <option value="11">Grade 11</option>
+                  <option value="12">Grade 12</option>
                   <option value="1">1st Year</option>
                   <option value="2">2nd Year</option>
                   <option value="3">3rd Year</option>
@@ -563,30 +515,25 @@
                 </select>
               </div>
               <div class="form-group">
-                <label class="form-label">Enrollment Date *</label>
-                <input type="date" class="form-control" id="enrollmentDate" required>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-section">
-            <h4 class="section-title">Emergency Contact</h4>
-            <div class="form-grid">
-              <div class="form-group">
-                <label class="form-label">Contact Name *</label>
-                <input type="text" class="form-control" id="emergencyName" required>
+                <label class="form-label">Section *</label>
+                <select class="form-control" id="section" required>
+                  <option value="">Select Section</option>
+                  <option value="a">Section A</option>
+                  <option value="p">Section P</option>
+                  <option value="e">Section E</option>
+                </select>
               </div>
               <div class="form-group">
-                <label class="form-label">Relationship *</label>
-                <input type="text" class="form-control" id="emergencyRelationship" required placeholder="e.g., Parent, Guardian, Spouse">
+                <label class="form-label">Email *</label>
+                <input type="email" class="form-control" id="email" required>
               </div>
               <div class="form-group">
-                <label class="form-label">Contact Phone *</label>
-                <input type="tel" class="form-control" id="emergencyPhone" required>
+                <label class="form-label">Contact Number *</label>
+                <input type="tel" class="form-control" id="contactNumber" required>
               </div>
               <div class="form-group">
-                <label class="form-label">Contact Email</label>
-                <input type="email" class="form-control" id="emergencyEmail">
+                <label class="form-label">RFID Code *</label>
+                <input type="text" class="form-control" id="rfidCode" required>
               </div>
             </div>
           </div>
@@ -841,20 +788,28 @@
                 <label class="form-label">Course *</label>
                 <select class="form-control" id="editCourse" required>
                   <option value="">Select Course</option>
+                  <option value="stem">STEM</option>
                   <option value="cs">Computer Science</option>
                   <option value="it">Information Technology</option>
                   <option value="ba">Business Administration</option>
-                  <option value="eng">Engineering</option>
+                  <option value="eng">Tourism Management</option>
+                  <option value="ict">ICT</option>
+                  <option value="stem">STEM</option>
+                  <option value="abm">ABM</option>
+                  <option value="humms">HUMMS</option>
                 </select>
               </div>
               <div class="form-group">
                 <label class="form-label">Year Level *</label>
                 <select class="form-control" id="editYearLevel" required>
                   <option value="">Select Year</option>
+                  <option value="11">Grade 11</option>
+                  <option value="12">Grade 12</option>
                   <option value="1">1st Year</option>
                   <option value="2">2nd Year</option>
                   <option value="3">3rd Year</option>
                   <option value="4">4th Year</option>
+
                 </select>
               </div>
               <div class="form-group">
@@ -1008,4 +963,4 @@
   <!-- JavaScript Files -->
   <script src="modules/js/records-management.js"></script>
 </body>
-</html>
+</html> 

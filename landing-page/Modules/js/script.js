@@ -161,7 +161,7 @@ if (loginForm) {
         break;
       case "student":
         loginUrl = `${API_BASE_URL}${STUDENT_LOGIN_ENDPOINT}`;
-        redirectPath = "/student-dashboard.html";
+        redirectPath = "../../../attendance-tracking/modules/Student/student-dashboard.html";
         break;
       case "professor":
         loginUrl = `${API_BASE_URL}${PROFESSOR_LOGIN_ENDPOINT}`;

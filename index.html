@@ -34,6 +34,7 @@
         <li><a href="#testimonials">Reviews</a></li>
         <li><a href="#faq">FAQ</a></li>
         <li><button class="login-btn" id="loginBtn">Login</button></li>
+
       </ul>
       <div class="hamburger" id="hamburger">
         <span></span>
@@ -475,6 +476,12 @@
           <span class="login-text">Login to Portal</span>
           <span class="loading-spinner" aria-hidden="true"></span>
         </button>
+
+        <button type="button" class="login-attendance-btn" id="attendanceLoginBtn">
+        <i class="fas fa-id-card"></i>
+        Login to Attendance
+      </button>
+      
         
         <div class="forgot-password">
           <a href="#">Forgot your password?</a>
@@ -489,6 +496,12 @@
   </div>
 
   <!-- Main JavaScript -->
+
+  <script>
+    document.getElementById("attendnaceLoginBtn").addEventListener("click", () => {
+      window.location.href = "/attendance/index.html";
+    })
+  </script>
   <script src="/landing-page/Modules/js/script.js"></script>
 </body>
 </html>

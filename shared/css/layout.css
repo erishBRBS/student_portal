@@ -13,6 +13,7 @@ body {
   z-index: 1000;
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .main-content {

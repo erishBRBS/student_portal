@@ -16,57 +16,7 @@
 <body>
     <div id="alertContainer" class="alert-container"></div>
 
-    <div class="sidebar">
-        <div class="logo-container">
-            <div class="logo">STI</div>
-            <div class="logo-text">STI Bacoor</div>
-        </div>
-        <div class="user-info">
-            <div class="user-avatar">AU</div>
-            <div class="user-details">
-                <div class="user-name">Admin User</div>
-                <div class="user-role">Administrator</div>
-            </div>
-        </div>
-        <div class="nav-menu">
-            <a href="admin-dashboard.html" class="nav-item">
-                <i class="fas fa-home"></i>
-                <span>Dashboard</span>
-            </a>
-            <a href="admin-attendance.html" class="nav-item">
-                <i class="fas fa-calendar-check"></i>
-                <span>Attendance</span>
-            </a>
-            <a href="admin-manage-students.html" class="nav-item active">
-                <i class="fas fa-user-cog"></i>
-                <span>Manage Students</span>
-            </a>
-            <a href="admin-schedule.html" class="nav-item">
-                <i class="fas fa-clock"></i>
-                <span>Schedule</span>
-            </a>
-            <a href="admin-announcements.html" class="nav-item">
-                <i class="fas fa-bullhorn"></i>
-                <span>Announcements</span>
-            </a>
-            <a href="admin-settings.html" class="nav-item">
-                <i class="fas fa-cog"></i>
-                <span>Settings</span>
-            </a>
-            <a href="admin-add-admin.html" class="nav-item">
-                <i class="fas fa-user-plus"></i>
-                <span>Add New Admin</span>
-            </a>
-            <a href="admin-reset-password.html" class="nav-item">
-                <i class="fas fa-key"></i>
-                <span>Reset Password</span>
-            </a>
-            <a href="logout.html" class="nav-item">
-                <i class="fas fa-sign-out-alt"></i>
-                <span>Logout</span>
-            </a>
-        </div>
-    </div>
+    <div id="sidebar-container"></div>
 
     <div class="main-content">
         <div class="header">
@@ -91,85 +41,7 @@
                 </div>
             </div>
         </div>
-
-        <div class="dashboard">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">Register New Student</div>
-                </div>
-                <form class="form-grid" id="registerForm">
-                    <div class="form-group">
-                        <label for="firstName">First Name</label>
-                        <input type="text" id="firstName" class="form-control" placeholder="Enter first name" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="lastName">Last Name</label>
-                        <input type="text" id="lastName" class="form-control" placeholder="Enter last name" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="studentId">Student ID</label>
-                        <input type="text" id="studentId" class="form-control" placeholder="Enter student ID" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="course">Course</label>
-                        <select id="course" class="form-control" required>
-                            <option value="">Select Course</option>
-                            <option value="BSIT">BSIT</option>
-                            <option value="BSTM">BSED</option>
-                            <option value="BSCS">BSCS</option>
-                            <option value="BSBA">BSBA</option>
-                            <option value="BSPSY">BSPSY</option>
-                            <option value="ICT">ICT</option>
-                            <option value="STEM">STEM</option>
-                            <option value="ABM">ABM</option>
-                            <option value="HUMSS">HUMMS</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="yearLevel">Year Level</label>
-                        <select id="yearLevel" class="form-control" required>
-                            <option value="">Select Year</option>
-                            <option value="Grade 11">Grade 11</option>
-                            <option value="Grade 12">Grade 12</option>
-                            <option value="1st Year">1st Year</option>
-                            <option value="2nd Year">2nd Year</option>
-                            <option value="3rd Year">3rd Year</option>
-                            <option value="4th Year">4th Year</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="section">Section</label>
-                        <input type="text" id="section" class="form-control" placeholder="e.g., Section A" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" class="form-control" placeholder="Enter email address" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="contact">Contact Number</label>
-                        <input type="text" id="contact" class="form-control" placeholder="Enter contact number" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="rfid">RFID Code</label>
-                        <input type="text" id="rfid" class="form-control" placeholder="Scan or enter RFID code" required>
-                    </div>
-
-                    <div class="form-group" style="grid-column: 1 / -1; display: flex; justify-content: flex-end;">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-user-plus"></i> Register Student
-                        </button>
-                    </div>
-                </form>
-            </div>
-
+        
             <div class="action-buttons">
                 <button class="btn btn-success" id="exportCSV">
                     <i class="fas fa-file-csv"></i> Export CSV
@@ -364,5 +236,10 @@
             window.adminManageStudents = new AdminManageStudents();
         });
     </script>
+    
+    <script type="module">
+    import { renderSidebar } from "../../../assets/js/components/sidebar/sidebar.component.js";
+    renderSidebar("admin-manage-students");
+  </script>
 </body>
 </html>

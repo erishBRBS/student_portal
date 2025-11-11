@@ -3,6 +3,7 @@ class AdminDashboard {
     constructor() {
         this.token = null;
         this.user = null;
+        this.userRoleName = null;
         this.init();
     }
 
@@ -27,6 +28,8 @@ class AdminDashboard {
         this.token = localStorage.getItem('authToken');
         const userData = localStorage.getItem('currentUser');
         this.user = userData ? JSON.parse(userData) : null;
+        this.userRoleName = localStorage.getItem('userRoleName');
+       
 
         if (!this.token) {
             AlertManager.warning('You are not logged in. Redirecting to login...');
@@ -36,6 +39,8 @@ class AdminDashboard {
         } else {
             console.log('✅ Auth Token Loaded:', this.token);
             console.log('👤 Current User:', this.user);
+            console.log('👤 userRoleName:', this.userRoleName);
+
         }
     }
 

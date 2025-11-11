@@ -192,22 +192,11 @@ if (loginForm) {
 
       if (response.data && response.data.token) {
         // script.js, bandang line 195 (sa loob ng try block)
-
-        const responseDataString = JSON.stringify(response.data, null, 2);
-        console.log(
-          "✅ TOKEN SUCCESSFULLY RETRIEVED! Full Response:",
-          response.data // Para sa interactive object
-        );
-        console.log("-----------------------------------------");
-        console.log("Response JSON String (Copyable):", responseDataString); // <--- IDAGDAG MO ITO
-        console.log("-----------------------------------------"); // Success: Store the Auth Token and User Data
+        const user = new AuthModel(response.data.user);
 
         localStorage.setItem("authToken", response.data.token);
-        // ...
-
-        // Success: Store the Auth Token and User Data
-        localStorage.setItem("authToken", response.data.token);
-        localStorage.setItem("currentUser", JSON.stringify(response.data.user));
+        localStorage.setItem("currentUser", JSON.stringify(user));
+        localStorage.setItem("userRoleName", user.role.roleName);
 
         // Close modal and clean up
         loginForm.reset();
@@ -261,7 +250,7 @@ if (hamburger && navLinks) {
       hamburger.classList.remove("active");
       navLinks.classList.remove("active");
     });
-  });
+  }); 
 }
 
 // Smooth Scrolling

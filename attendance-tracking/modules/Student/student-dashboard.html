@@ -21,51 +21,8 @@
   <div id="alertContainer" class="alert-container"></div>
 
   <!-- Sidebar -->
-  <div class="sidebar">
-    <div class="logo-container">
-      <div class="logo">STI</div>
-      <div class="logo-text">STI Bacoor</div>
-    </div>
-    
-    <div class="user-info">
-      <div class="user-avatar">HY</div>
-      <div class="user-details">
-        <div class="user-name">Hadassa Yap</div>
-        <div class="user-role">Student</div>
-      </div>
-    </div>
-    
-    <div class="nav-menu">
-      <a href="student-dashboard.html" class="nav-item active">
-        <i class="fas fa-home"></i>
-        <span>Dashboard</span>
-      </a>
-      <a href="student-gate-attendance.html" class="nav-item">
-        <i class="fas fa-door-open"></i>
-        <span>Gate Attendance</span>
-      </a>
-      <a href="student-subject-attendance.html" class="nav-item">
-        <i class="fas fa-calendar-check"></i>
-        <span>Subject Attendance</span>
-      </a>
-      <a href="student-schedule.html" class="nav-item">
-        <i class="fas fa-clock"></i>
-        <span>Schedule</span>
-      </a>
-      <a href="student-announcements.html" class="nav-item">
-        <i class="fas fa-bullhorn"></i>
-        <span>Announcements</span>
-      </a>
-      <a href="student-settings.html" class="nav-item">
-        <i class="fas fa-cog"></i>
-        <span>Settings</span>
-      </a>
-      <a href="login.html" class="nav-item">
-        <i class="fas fa-sign-out-alt"></i>
-        <span>Logout</span>
-      </a>
-    </div>
-  </div>
+   
+  <div id="sidebar-container"></div>
 
   <!-- Main Content -->
   <div class="main-content">
@@ -288,6 +245,10 @@
         new StudentDashboard();
       }
     });
+  </script>
+  <script type="module">
+    import { renderSidebar } from "../../../assets/js/components/sidebar/sidebar.component.js";
+    renderSidebar("student-dashboard");
   </script>
 </body>
 </html>

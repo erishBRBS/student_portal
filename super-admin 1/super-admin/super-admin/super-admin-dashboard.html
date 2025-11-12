@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>STI Bacoor - Admin Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Shared CSS -->
+  <link rel="stylesheet" href="/shared/css/variables.css">
+  <link rel="stylesheet" href="/shared/css/base.css">
+  <link rel="stylesheet" href="/shared/css/layout.css">
+  <link rel="stylesheet" href="/shared/css/components.css">
+  <link rel="stylesheet" href="/shared/css/utilities.css">
+  <link rel="stylesheet" href="/shared/css/alerts.css">
+  
+  <!-- Admin Specific CSS -->
+  <link rel="stylesheet" href="modules/css/admin-common.css">
+  <link rel="stylesheet" href="modules/css/super-admin-styles.css">
+</head>
+<body>
+  <!-- Modern Alert Container -->
+  <div id="alertContainer" class="alert-container"></div>
+
+  <!-- Sidebar -->
+   <div id="sidebar-container"></div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Header -->
+    <div class="header">
+      <button class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <div class="page-title">
+        <h1>Super Admin Dashboard</h1>
+        <p id="todayDate">Monday, September 11, 2023</p>
+      </div>
+      
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <i class="fas fa-moon"></i>
+        </button>
+        
+        <div class="notification-btn">
+          <i class="fas fa-bell"></i>
+          <span class="notification-badge">3</span>
+        </div>
+        
+        <div class="admin-profile">
+          <div class="admin-avatar">AU</div>
+          <div>Admin User</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard">
+      <!-- Stats Cards -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon blue-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="stat-info">
+            <div class="stat-value" id="totalStudents">3,240</div>
+            <div class="stat-label">Total Students</div>
+          </div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-icon yellow-icon">
+            <i class="fas fa-chalkboard-teacher"></i>
+          </div>
+          <div class="stat-info">
+            <div class="stat-value" id="totalTeachers">142</div>
+            <div class="stat-label">Total Faculty</div>
+          </div>
+        </div>
+
+
+      <!-- Today's Activity -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Today's Activity</div>
+          <a href="#" class="view-all">View All</a>
+        </div>
+        
+        <ul class="activity-list" id="activityList">
+          <li class="activity-item">
+            <div class="activity-icon">
+              <i class="fas fa-id-card"></i>
+            </div>
+            <div class="activity-content">
+              <div class="activity-time">08:00 AM</div>
+              <div class="activity-text">Gate Attendance recorded for John Doe (RFID)</div>
+            </div>
+          </li>
+          
+          <li class="activity-item">
+            <div class="activity-icon">
+              <i class="fas fa-camera"></i>
+            </div>
+            <div class="activity-content">
+              <div class="activity-time">08:15 AM</div>
+              <div class="activity-text">Gate Attendance recorded for Jane Smith (Face Recognition)</div>
+            </div>
+          </li>
+          
+          <li class="activity-item">
+            <div class="activity-icon">
+              <i class="fas fa-chalkboard"></i>
+            </div>
+            <div class="activity-content">
+              <div class="activity-time">09:00 AM</div>
+              <div class="activity-text">Math class attendance submitted by Dr. Rodriguez</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shared JavaScripts -->
+  <script src="/shared/js/utils.js"></script>
+  <script src="/shared/js/theme.js"></script>
+  <script src="/shared/js/sidebar.js"></script>
+  <script src="/shared/js/alerts.js"></script>
+  
+  <!-- Admin Specific JavaScript -->
+  <script src="modules/js/admin-common.js"></script>
+  <script src="modules/js/super-admin-dashboard.js"></script>
+
+  <script>
+    // Initialize the application
+    document.addEventListener('DOMContentLoaded', function() {
+      try {
+        // Set current date
+        Utils.setCurrentDate();
+        
+        // Initialize theme manager
+        if (typeof ThemeManager !== 'undefined') {
+          new ThemeManager();
+        }
+        
+        // Initialize sidebar manager
+        if (typeof SidebarManager !== 'undefined') {
+          new SidebarManager();
+        }
+        
+        // Initialize admin dashboard
+        if (typeof AdminDashboard !== 'undefined') {
+          new AdminDashboard();
+        }
+        
+        console.log('Admin Dashboard initialized successfully!');
+      } catch (error) {
+        console.error('Error initializing dashboard:', error);
+      }
+    });
+  </script>
+    <script type="module">
+    import { renderSidebar } from "../../../assets/js/components/sidebar/sidebar.component.js";
+    renderSidebar("admin-dashboard");
+  </script>
+</body>
+</html>

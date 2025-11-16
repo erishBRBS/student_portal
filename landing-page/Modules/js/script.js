@@ -3,9 +3,12 @@
 // ==============================================================================
 const API_BASE_URL = "https://dit-rfid.arvin-stg.org/api/v1/";
 const ADMIN_LOGIN_ENDPOINT = "ats/login/admin";
-const STUDENT_LOGIN_ENDPOINT = "ats/login/student";
-const PROFESSOR_LOGIN_ENDPOINT = "ats/login/professor";
-const PARENT_LOGIN_ENDPOINT = "ats/login/parent";
+const ATS_STUDENT_LOGIN_ENDPOINT = "ats/login/student";
+const ATS_PROFESSOR_LOGIN_ENDPOINT = "ats/login/professor";
+const ATS_PARENT_LOGIN_ENDPOINT = "ats/login/parent";
+const GPS_STUDENT_LOGIN_ENDPOINT = "gps/login/student";
+const GPS_PROFESSOR_LOGIN_ENDPOINT = "gps/login/professor";
+const GPS_PARENT_LOGIN_ENDPOINT = "gps/login/parent";
 const CREATE_PROFESSOR_ENDPOINT = "ats/professor"; //cai
 const LOGOUT_ENDPOINT = "ats/logout";
 // ==============================================================================
@@ -23,7 +26,8 @@ const userTypeOptions = document.querySelectorAll(".user-type-option");
 const userIdLabel = document.getElementById("userIdLabel");
 const hamburger = document.getElementById("hamburger");
 const navLinks = document.querySelector(".nav-links");
-const loginButton = document.querySelector(".login-submit-btn");
+const loginButtonATS = document.getElementById("submit-btn-ats");
+const loginButtonGPS = document.getElementById("submit-btn-gps");
 const loginText = document.querySelector(".login-text");
 const loadingSpinner = document.querySelector(".loading-spinner");
 
@@ -34,13 +38,15 @@ const logoutHeaderBtn = document.getElementById("logoutBtn");
 // --- UTILITY FUNCTIONS ---
 
 // Function to toggle loading state on the login button
-function setLoadingState(isLoading) {
-  if (loginButton && loginText && loadingSpinner) {
-    loginButton.disabled = isLoading;
-    loginText.style.display = isLoading ? "none" : "inline";
-    loadingSpinner.style.display = isLoading ? "inline-block" : "none";
-    loginButton.classList.toggle("is-loading", isLoading);
-  }
+function setLoadingState(isLoading, button) {
+  const text = button.querySelector(".login-text");
+  const spinner = button.querySelector(".loading-spinner");
+
+  button.disabled = isLoading;
+  text.style.display = isLoading ? "none" : "inline";
+  spinner.style.display = isLoading ? "inline-block" : "none";
+
+  button.classList.toggle("is-loading", isLoading);
 }
 
 // Function to check login status and update header buttons
@@ -56,8 +62,8 @@ function checkLoginStatus() {
     if (logoutHeaderBtn) logoutHeaderBtn.style.display = "none";
   }
 }
-  //cai
-  const SuperAdmin = (function() {
+//cai
+const SuperAdmin = (function () {
   function getAuthToken() {
     return localStorage.getItem("authToken");
   }
@@ -65,14 +71,24 @@ function checkLoginStatus() {
   async function createProfessor(professorData) {
     try {
       const token = getAuthToken();
-      const response = await axios.post(`${API_BASE_URL}${CREATE_PROFESSOR_ENDPOINT}`, professorData, {
-        headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" }
-      });
+      const response = await axios.post(
+        `${API_BASE_URL}${CREATE_PROFESSOR_ENDPOINT}`,
+        professorData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
       console.log("Professor created:", response.data);
       showAlert("Professor created successfully!", "success");
       return response.data;
     } catch (error) {
-      console.error("Error creating professor:", error.response?.data || error.message);
+      console.error(
+        "Error creating professor:",
+        error.response?.data || error.message
+      );
       showAlert("Failed to create professor.", "error");
     }
   }
@@ -80,12 +96,18 @@ function checkLoginStatus() {
   async function getProfessors() {
     try {
       const token = getAuthToken();
-      const response = await axios.get(`${API_BASE_URL}${CREATE_PROFESSOR_ENDPOINT}`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const response = await axios.get(
+        `${API_BASE_URL}${CREATE_PROFESSOR_ENDPOINT}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       return response.data;
     } catch (error) {
-      console.error("Error fetching professors:", error.response?.data || error.message);
+      console.error(
+        "Error fetching professors:",
+        error.response?.data || error.message
+      );
       showAlert("Failed to fetch professors.", "error");
       return [];
     }
@@ -94,14 +116,21 @@ function checkLoginStatus() {
   async function updateProfessor(professorId, updatedData) {
     try {
       const token = getAuthToken();
-      const response = await axios.put(`${API_BASE_URL}${CREATE_PROFESSOR_ENDPOINT}/${professorId}`, updatedData, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const response = await axios.put(
+        `${API_BASE_URL}${CREATE_PROFESSOR_ENDPOINT}/${professorId}`,
+        updatedData,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       console.log("Professor updated:", response.data);
       showAlert("Professor updated successfully!", "success");
       return response.data;
     } catch (error) {
-      console.error("Error updating professor:", error.response?.data || error.message);
+      console.error(
+        "Error updating professor:",
+        error.response?.data || error.message
+      );
       showAlert("Failed to update professor.", "error");
     }
   }
@@ -109,14 +138,20 @@ function checkLoginStatus() {
   async function deleteProfessor(professorId) {
     try {
       const token = getAuthToken();
-      const response = await axios.delete(`${API_BASE_URL}${CREATE_PROFESSOR_ENDPOINT}/${professorId}`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const response = await axios.delete(
+        `${API_BASE_URL}${CREATE_PROFESSOR_ENDPOINT}/${professorId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       console.log("Professor deleted:", response.data);
       showAlert("Professor deleted successfully!", "success");
       return response.data;
     } catch (error) {
-      console.error("Error deleting professor:", error.response?.data || error.message);
+      console.error(
+        "Error deleting professor:",
+        error.response?.data || error.message
+      );
       showAlert("Failed to delete professor.", "error");
     }
   }
@@ -125,7 +160,7 @@ function checkLoginStatus() {
     createProfessor,
     getProfessors,
     updateProfessor,
-    deleteProfessor
+    deleteProfessor,
   };
 })(); //cai
 
@@ -170,7 +205,7 @@ function performClientSideLogout() {
   checkLoginStatus();
 
   // 3. Redirect to landing page
-  window.location.href = '/index.html';
+  window.location.href = "/index.html";
 }
 
 // Attach logout handler to the button
@@ -216,45 +251,70 @@ if (loginForm) {
   loginForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    const submitBtn = e.submitter;
+    const isATS = submitBtn.id === "submit-btn-ats";
+    const isGPS = submitBtn.id === "submit-btn-gps";
+
     const activeOption = document.querySelector(".user-type-option.active");
     const userType = activeOption
       ? activeOption.getAttribute("data-type")
       : "student";
+
     const userId = userIdInput.value;
     const password = passwordInput.value;
 
-    // 1. Determine the correct API endpoint and Redirect Path
     let loginUrl = "";
-    // let redirectPath = "/";
+    let redirectPath = "/";
 
-    switch (userType) {
-
-      case "admin":
-        loginUrl = `${API_BASE_URL}${ADMIN_LOGIN_ENDPOINT}`;
-        redirectPath = "../../../super-admin/pages/super-admin-dashboard.html";
-        break;
-
-
-      case "student":
-        loginUrl = `${API_BASE_URL}${STUDENT_LOGIN_ENDPOINT}`;
-        redirectPath = "../../../attendance-tracking/modules/Student/student-dashboard.html";
-        break;
-      case "professor":
-        loginUrl = `${API_BASE_URL}${PROFESSOR_LOGIN_ENDPOINT}`;
-        redirectPath = "/professor-dashboard.html";
-        break;
-      case "parent":
-        loginUrl = `${API_BASE_URL}${PARENT_LOGIN_ENDPOINT}`;
-        redirectPath = "/parent-dashboard.html";
-        break;
-     // case "super-admin":
-    //loginUrl = `${API_BASE_URL}${ADMIN_LOGIN_ENDPOINT}`; 
-    //redirectPath =
-    //  "../../../attendance-tracking/modules/SuperAdmin/super-admin-dashboard.html";
-    //break;
-      default:
-        alert("Invalid user type selected.");
-        return;
+    if (isATS) {
+      switch (userType) {
+        case "admin":
+          loginUrl = `${API_BASE_URL}${ADMIN_LOGIN_ENDPOINT}`;
+            redirectPath = "/super-admin/index.html#/super-admin-dashboard";
+          break;
+        case "student":
+          loginUrl = `${API_BASE_URL}${ATS_STUDENT_LOGIN_ENDPOINT}`;
+          redirectPath = "/attendance-tracking/index.html#/student/student-dashboard";
+          break;
+        case "professor":
+          loginUrl = `${API_BASE_URL}${ATS_PROFESSOR_LOGIN_ENDPOINT}`;
+          redirectPath = "/attendance-tracking/#/teacher/teacher-dashboard";
+          break;
+        case "parent":
+          loginUrl = `${API_BASE_URL}${ATS_PARENT_LOGIN_ENDPOINT}`;
+          // redirectPath = "../../../attendance-tracking/modules"; WALA PANG FRONTEND PARA SA PARENT
+          break;
+        default:
+          alert("Invalid user type selected for ATS.");
+          return;
+      }
+    } else if (isGPS) {
+      switch (userType) {
+        case "admin":
+          loginUrl = `${API_BASE_URL}${ADMIN_LOGIN_ENDPOINT}`;
+            redirectPath = "/super-admin/index.html#/super-admin-dashboard";
+          break;
+        case "student":
+          loginUrl = `${API_BASE_URL}${GPS_STUDENT_LOGIN_ENDPOINT}`;
+          redirectPath =
+            "../../../grade-portal/modules/students/dashboard.html";
+          break;
+        case "professor":
+          loginUrl = `${API_BASE_URL}${GPS_PROFESSOR_LOGIN_ENDPOINT}`;
+          redirectPath = "../../../grade-portal/modules/teacher/dashboard.html";
+          break;
+        case "parent":
+          loginUrl = `${API_BASE_URL}${GPS_PARENT_LOGIN_ENDPOINT}`;
+          redirectPath =
+            "../../../grade-portal/modules/parent/parent-dashboard.html";
+          break;
+        default:
+          alert("Invalid user type selected for GPS.");
+          return;
+      }
+    } else {
+      alert("Login system not determined. Please click a valid login button.");
+      return;
     }
 
     const credentials = {
@@ -263,71 +323,61 @@ if (loginForm) {
       user_type: userType,
     };
 
-    setLoadingState(true);
-    console.log("credentials", credentials);
-    console.log("loginUrl", loginUrl);
+    setLoadingState(true, submitBtn);
 
     try {
-      // 2. Perform Axios POST to the determined specific URL
       const response = await axios.post(loginUrl, credentials);
 
       if (response.data && response.data.token) {
-        // script.js, bandang line 195 (sa loob ng try block)
         const user = new AuthModel(response.data.user);
-        
 
         localStorage.setItem("authToken", response.data.token);
         localStorage.setItem("currentUser", JSON.stringify(user));
         localStorage.setItem("userRoleName", user.role.roleName);
 
-        // Close modal and clean up
         loginForm.reset();
         modal.style.display = "none";
         document.body.style.overflow = "auto";
-
-        // alert(`Login successful! Redirecting to ${userType} portal...`);
         checkLoginStatus();
 
-        
-
-        // 3. Redirect to the determined dashboard path
         window.location.href = redirectPath;
       } else {
-        throw new Error(
-          "Login failed: Server response is incomplete or missing token."
-        );
+        throw new Error("Missing token from server.");
       }
     } catch (error) {
       console.error("Login Failed Error:", error);
 
-      let errorMessage = "Login failed. Please check yo ur ID and password.";
+      let errorMessage = "Login failed. Please check your ID and password.";
 
       if (error.response) {
         if (error.response.status === 401 || error.response.status === 404) {
           errorMessage = `Invalid ID or password for the selected ${userType} type.`;
-        } else if (error.response.data && error.response.data.message) {
+        } else if (error.response.data?.message) {
           errorMessage = error.response.data.message;
-        } else if (error.response.data && error.response.data.errors) {
-          errorMessage =
-            "Validation Error: " +
-            Object.values(error.response.data.errors).flat().join(", ");
+        } else if (error.response.data?.errors) {
+          errorMessage = Object.values(error.response.data.errors)
+            .flat()
+            .join(", ");
         }
       }
 
       alert(errorMessage);
     } finally {
-      setLoadingState(false);
+      setLoadingState(false, submitBtn);
     }
   });
 }
 
 //cai
 document.addEventListener("DOMContentLoaded", () => {
-
   // --- Elements for Create Professor Modal ---
   const createProfessorModal = document.getElementById("createProfessorModal");
-  const openCreateProfessorBtn = document.getElementById("openCreateProfessorModal");
-  const closeCreateProfessorModal = document.getElementById("closeCreateProfessorModal");
+  const openCreateProfessorBtn = document.getElementById(
+    "openCreateProfessorModal"
+  );
+  const closeCreateProfessorModal = document.getElementById(
+    "closeCreateProfessorModal"
+  );
   const createProfessorForm = document.getElementById("createProfessorForm");
   const professorTableBody = document.getElementById("professorTableBody");
 
@@ -351,7 +401,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
- 
   createProfessorForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
     const newProfData = {
@@ -361,7 +410,7 @@ document.addEventListener("DOMContentLoaded", () => {
       username: document.getElementById("profUsername").value,
       password: document.getElementById("profPassword").value,
       department_id: parseInt(document.getElementById("profDept").value),
-      user_role_id: parseInt(document.getElementById("profRole").value)
+      user_role_id: parseInt(document.getElementById("profRole").value),
     };
     const result = await SuperAdmin.createProfessor(newProfData);
     if (result) {
@@ -395,7 +444,6 @@ document.addEventListener("DOMContentLoaded", () => {
       professorTableBody.appendChild(row);
     });
 
-
     professorTableBody.querySelectorAll(".delete-btn").forEach((btn) => {
       btn.addEventListener("click", async () => {
         const profId = btn.getAttribute("data-id");
@@ -405,8 +453,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
     });
-
-
   }
 
   // --- Initial Table Load ---
@@ -426,7 +472,7 @@ if (hamburger && navLinks) {
       hamburger.classList.remove("active");
       navLinks.classList.remove("active");
     });
-  }); 
+  });
 }
 
 // Smooth Scrolling
@@ -532,5 +578,3 @@ document.querySelectorAll(".feature-card").forEach((card) => {
 
 // Initial check when the page loads
 document.addEventListener("DOMContentLoaded", checkLoginStatus);
-
-

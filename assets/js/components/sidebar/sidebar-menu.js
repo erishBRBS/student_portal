@@ -1,23 +1,19 @@
-export const adminMenu = [
-  { label: "Dashboard", icon: "fas fa-home", link: "Admin/admin-dashboard" },
-  { label: "Attendance", icon: "fas fa-calendar-check", link: "Admin/admin-attendance" },
-  { label: "Manage Students", icon: "fas fa-user-cog", link: "Admin/admin-manage-students" },
-  { label: "Schedule", icon: "fas fa-clock", link: "Admin/admin-schedule" },
-  { label: "Announcements", icon: "fas fa-bullhorn", link: "Admin/admin-announcements" },
-  { label: "Settings", icon: "fas fa-cog", link: "Admin/admin-settings" },
-  { label: "Add New Admin", icon: "fas fa-user-plus", link: "Admin/admin-add-admin" },
-  { label: "Reset Password", icon: "fas fa-key", link: "Admin/admin-reset-password" },
-  { label: "Logout", icon: "fas fa-sign-out-alt", link: "Admin/logout" }
+export const superAdminMenu = [
+  { label: "Dashboard", icon: "fas fa-home", link: "super-admin-dashboard" },
+  { label: "Attendance Management", icon: "fas fa-calendar-check", link: "attendance-tracking-management" },
+  { label: "Grade Management", icon: "fas fa-user-cog", link: "grade-portal-management" },
+  { label: "Settings", icon: "fas fa-cog", link: "super-admin-settings" },
+  { label: "Logout", icon: "fas fa-sign-out-alt", link: "logout" }
 ];
 
 export const studentsMenu = [
-  { label: "Dashboard", icon: "fas fa-home", link: "Student/student-dashboard" },
-  { label: "Gate Attendance", icon: "fas fa-calendar-check", link: "Student/student-gate-attendance" },
-  { label: "Subject Attendance", icon: "fas fa-user-cog", link: "Student/student-subject-attendance" },
-  { label: "Schedule", icon: "fas fa-clock", link: "Student/student-schedule" },
-  { label: "Announcements", icon: "fas fa-bullhorn", link: "Student/student-announcements" },
-  { label: "Settings", icon: "fas fa-cog", link: "Student/student-settings" },
-  { label: "Logout", icon: "fas fa-sign-out-alt", link: "Student/logout" }
+  { label: "Dashboard", icon: "fas fa-home", link: "student/student-dashboard" },
+  { label: "Gate Attendance", icon: "fas fa-calendar-check", link: "student/student-gate-attendance" },
+  { label: "Subject Attendance", icon: "fas fa-user-cog", link: "student/student-subject-attendance" },
+  { label: "Schedule", icon: "fas fa-clock", link: "student/student-schedule" },
+  { label: "Announcements", icon: "fas fa-bullhorn", link: "student/student-announcements" },
+  { label: "Settings", icon: "fas fa-cog", link: "student/student-settings" },
+  { label: "Logout", icon: "fas fa-sign-out-alt", link: "student/logout" }
 ];
 
 export const TeacherMenu = [

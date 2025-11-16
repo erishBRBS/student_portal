@@ -1,7 +1,7 @@
 // ==============================================================================
 // 1. AXIOS CONFIGURATION (endpoints)
 // ==============================================================================
-const API_BASE_URL = "http://localhost:8000/api/v1/";
+const API_BASE_URL = "https://dit-rfid.arvin-stg.org/api/v1/";
 const ADMIN_LOGIN_ENDPOINT = "ats/login/admin";
 const ATS_STUDENT_LOGIN_ENDPOINT = "ats/login/student";
 const ATS_PROFESSOR_LOGIN_ENDPOINT = "ats/login/professor";

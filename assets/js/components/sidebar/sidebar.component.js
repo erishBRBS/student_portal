@@ -1,7 +1,5 @@
-//import { adminMenu } from "./sidebar-menu.js";
-import { studentsMenu, adminMenu, TeacherMenu } from "./sidebar-menu.js";
-
-
+// assets/js/components/sidebar/sidebar.component.js
+import { studentsMenu, superAdminMenu, TeacherMenu } from "./sidebar-menu.js";
 
 export function renderSidebar(activePage = "") {
   const container = document.getElementById("sidebar-container");
@@ -11,57 +9,41 @@ export function renderSidebar(activePage = "") {
     return;
   }
 
-  let menuHtml = "";
-  var userRoleName = localStorage.getItem('userRoleName');
+  const userRoleName = localStorage.getItem("userRoleName");
+  let menu = [];
 
-  if(userRoleName === 'Admin') {
-      menuHtml = adminMenu
+  if (userRoleName === "Admin") {
+    menu = superAdminMenu;
+  } else if (userRoleName === "Student") {
+    menu = studentsMenu;
+  } else if (userRoleName === "Professor" || userRoleName === "Teacher") {
+    menu = TeacherMenu;
+  } else {
+    menu = []; // not logged in / unknown role
+  }
+
+  const menuHtml = menu
     .map(item => `
-      <a href="../${item.link}.html" class="nav-item ${activePage === item.link ? "active" : ""}">
+      <div class="nav-item ${activePage === item.link ? "active" : ""}"
+           data-link="${item.link}">
         <i class="${item.icon}"></i>
         <span>${item.label}</span>
-      </a>
+      </div>
     `)
     .join("");
-  }
-
-
- else if(userRoleName === 'Student') {
-     menuHtml = studentsMenu
-     .map(item => `
-     <a href="../${item.link}.html" class="nav-item ${activePage === item.link ? "active" : ""}">
-     <i class="${item.icon}"></i>
-          <span>${item.label}</span>
-       </a>
-    `)
-   .join("");
-
- }
-
-  else if(userRoleName === 'Professor') {
-         menuHtml = TeacherMenu
-    .map(item => `
-      <a href="../${item.link}.html" class="nav-item ${activePage === item.link ? "active" : ""}">
-        <i class="${item.icon}"></i>
-        <span>${item.label}</span>
-      </a>
-    `)
-    .join(""); 
-  }
-
 
   container.innerHTML = `
     <div class="sidebar">
       <div class="logo-container">
         <div class="logo">STI</div>
-        <div class="logo-text">STI Bacoor</div>
+        <div class="logo-text">Attendance Portal</div>
       </div>
 
       <div class="user-info">
         <div class="user-avatar">AU</div>
         <div class="user-details">
-          <div class="user-name">Admin User</div>
-          <div class="user-role">Administrator</div>
+          <div class="user-name">${localStorage.getItem("fullName") || "User"}</div>
+          <div class="user-role">${userRoleName || "Unknown Role"}</div>
         </div>
       </div>
 

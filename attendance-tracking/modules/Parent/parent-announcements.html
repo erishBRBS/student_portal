@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Parent - Announcements</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Parent Announcements CSS -->
+  <link rel="stylesheet" href="modules/css/parent-announcements.css">
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="logo-container">
+      <div class="logo">STI</div>
+      <div class="logo-text">STI Bacoor</div>
+    </div>
+    
+    <div class="user-info">
+      <div class="user-avatar">MC</div>
+      <div class="user-details">
+        <div class="user-name">Maria Dela Cruz</div>
+        <div class="user-role">Parent</div>
+      </div>
+    </div>
+    
+    <div class="nav-menu">
+      <a href="parent-dashboard.html" class="nav-item">
+        <i class="fas fa-home"></i>
+        <span>Dashboard</span>
+      </a>
+      <a href="parent-gate-attendance.html" class="nav-item">
+        <i class="fas fa-door-open"></i>
+        <span>Gate Attendance</span>
+      </a>
+      <a href="parent-subject-attendance.html" class="nav-item">
+        <i class="fas fa-calendar-check"></i>
+        <span>Subject Attendance</span>
+      </a>
+      <a href="parent-schedule.html" class="nav-item">
+        <i class="fas fa-clock"></i>
+        <span>Schedule</span>
+      </a>
+      <a href="parent-announcements.html" class="nav-item active">
+        <i class="fas fa-bullhorn"></i>
+        <span>Announcements</span>
+      </a>
+      <a href="parent-settings.html" class="nav-item">
+        <i class="fas fa-cog"></i>
+        <span>Settings</span>
+      </a>
+      <a href="login.html" class="nav-item">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Header -->
+    <div class="header">
+      <button class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <div class="page-title">
+        <h1>Announcements</h1>
+        <p id="todayDate">Stay updated with the latest school announcements</p>
+      </div>
+      
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <i class="fas fa-moon"></i>
+        </button>
+        
+        <div class="notification-btn">
+          <i class="fas fa-bell"></i>
+          <span class="notification-badge">3</span>
+        </div>
+        
+        <div class="admin-profile">
+          <div class="admin-avatar">MC</div>
+          <div>Maria Dela Cruz</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard">
+      <!-- Filter Section -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Filter Announcements</div>
+        </div>
+        
+        <div class="filter-section">
+          <div class="filter-item">
+            <label for="filterType">Announcement Type</label>
+            <select id="filterType" class="form-select">
+              <option value="">All Types</option>
+              <option value="General">General Announcements</option>
+              <option value="Subject">Subject-Specific</option>
+              <option value="Event">School Events</option>
+              <option value="Holiday">Holidays</option>
+            </select>
+          </div>
+          <div class="filter-item">
+            <label for="searchBox">Search</label>
+            <input type="text" id="searchBox" class="form-control" placeholder="Search by keyword...">
+          </div>
+          <div class="filter-item" style="align-self: flex-end;">
+            <button class="btn w-100" onclick="applyFilters()">Apply Filters</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Announcement List -->
+      <div id="announcementList"></div>
+    </div>
+  </div>
+
+  <!-- Parent Announcements JS -->
+  <script src="modules/js/parent-announcements.js"></script>
+</body>
+</html>

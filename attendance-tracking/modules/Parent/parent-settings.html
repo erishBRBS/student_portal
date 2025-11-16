@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Parent - Settings</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Parent Settings CSS -->
+  <link rel="stylesheet" href="modules/css/parent-settings.css">
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="logo-container">
+      <div class="logo">STI</div>
+      <div class="logo-text">STI Bacoor</div>
+    </div>
+    
+    <div class="user-info">
+      <div class="user-avatar">MC</div>
+      <div class="user-details">
+        <div class="user-name">Maria Dela Cruz</div>
+        <div class="user-role">Parent</div>
+      </div>
+    </div>
+    
+    <div class="nav-menu">
+      <a href="parent-dashboard.html" class="nav-item">
+        <i class="fas fa-home"></i>
+        <span>Dashboard</span>
+      </a>
+      <a href="parent-gate-attendance.html" class="nav-item">
+        <i class="fas fa-door-open"></i>
+        <span>Gate Attendance</span>
+      </a>
+      <a href="parent-subject-attendance.html" class="nav-item">
+        <i class="fas fa-calendar-check"></i>
+        <span>Subject Attendance</span>
+      </a>
+      <a href="parent-schedule.html" class="nav-item">
+        <i class="fas fa-clock"></i>
+        <span>Schedule</span>
+      </a>
+      <a href="parent-announcements.html" class="nav-item">
+        <i class="fas fa-bullhorn"></i>
+        <span>Announcements</span>
+      </a>
+      <a href="parent-settings.html" class="nav-item active">
+        <i class="fas fa-cog"></i>
+        <span>Settings</span>
+      </a>
+      <a href="login.html" class="nav-item">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Header -->
+    <div class="header">
+      <button class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <div class="page-title">
+        <h1>Settings</h1>
+        <p id="todayDate">Manage your account preferences and settings</p>
+      </div>
+      
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <i class="fas fa-moon"></i>
+        </button>
+        
+        <div class="notification-btn">
+          <i class="fas fa-bell"></i>
+          <span class="notification-badge">3</span>
+        </div>
+        
+        <div class="admin-profile">
+          <div class="admin-avatar">MC</div>
+          <div>Maria Dela Cruz</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard">
+      <!-- Account Information -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Account Information</div>
+        </div>
+        
+        <form id="settingsForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Full Name</label>
+              <input type="text" class="form-control" id="parentName" value="Maria Dela Cruz">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" id="parentEmail" value="maria.delacruz@example.com">
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Mobile Number</label>
+              <input type="text" class="form-control" id="parentMobile" value="09171234567">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Change Password</label>
+              <input type="password" class="form-control" id="parentPassword" placeholder="Enter new password">
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Notification Preferences -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Notification Preferences</div>
+        </div>
+        
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="notifAnnouncements" checked>
+          <label class="form-check-label" for="notifAnnouncements">Receive General Announcements</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="notifAttendance" checked>
+          <label class="form-check-label" for="notifAttendance">Receive Attendance Alerts</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="notifGrades">
+          <label class="form-check-label" for="notifGrades">Receive Grade Updates</label>
+        </div>
+      </div>
+
+      <button class="btn" onclick="saveSettings()">Save Changes</button>
+    </div>
+  </div>
+
+  <!-- Parent Settings JS -->
+  <script src="modules/js/parent-settings.js"></script>
+</body>
+</html>

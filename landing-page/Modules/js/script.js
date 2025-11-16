@@ -6,6 +6,8 @@ const ADMIN_LOGIN_ENDPOINT = "ats/login/admin";
 const STUDENT_LOGIN_ENDPOINT = "ats/login/student";
 const PROFESSOR_LOGIN_ENDPOINT = "ats/login/professor";
 const PARENT_LOGIN_ENDPOINT = "ats/login/parent";
+const CREATE_PROFESSOR_ENDPOINT = "ats/professor"; //cai
+const LOGOUT_ENDPOINT = "ats/logout";
 // ==============================================================================
 
 // --- INITIALIZE ELEMENTS (CONSOLIDATED DECLARATIONS) ---
@@ -54,6 +56,78 @@ function checkLoginStatus() {
     if (logoutHeaderBtn) logoutHeaderBtn.style.display = "none";
   }
 }
+  //cai
+  const SuperAdmin = (function() {
+  function getAuthToken() {
+    return localStorage.getItem("authToken");
+  }
+
+  async function createProfessor(professorData) {
+    try {
+      const token = getAuthToken();
+      const response = await axios.post(`${API_BASE_URL}${CREATE_PROFESSOR_ENDPOINT}`, professorData, {
+        headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" }
+      });
+      console.log("Professor created:", response.data);
+      showAlert("Professor created successfully!", "success");
+      return response.data;
+    } catch (error) {
+      console.error("Error creating professor:", error.response?.data || error.message);
+      showAlert("Failed to create professor.", "error");
+    }
+  }
+
+  async function getProfessors() {
+    try {
+      const token = getAuthToken();
+      const response = await axios.get(`${API_BASE_URL}${CREATE_PROFESSOR_ENDPOINT}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching professors:", error.response?.data || error.message);
+      showAlert("Failed to fetch professors.", "error");
+      return [];
+    }
+  }
+
+  async function updateProfessor(professorId, updatedData) {
+    try {
+      const token = getAuthToken();
+      const response = await axios.put(`${API_BASE_URL}${CREATE_PROFESSOR_ENDPOINT}/${professorId}`, updatedData, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      console.log("Professor updated:", response.data);
+      showAlert("Professor updated successfully!", "success");
+      return response.data;
+    } catch (error) {
+      console.error("Error updating professor:", error.response?.data || error.message);
+      showAlert("Failed to update professor.", "error");
+    }
+  }
+
+  async function deleteProfessor(professorId) {
+    try {
+      const token = getAuthToken();
+      const response = await axios.delete(`${API_BASE_URL}${CREATE_PROFESSOR_ENDPOINT}/${professorId}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      console.log("Professor deleted:", response.data);
+      showAlert("Professor deleted successfully!", "success");
+      return response.data;
+    } catch (error) {
+      console.error("Error deleting professor:", error.response?.data || error.message);
+      showAlert("Failed to delete professor.", "error");
+    }
+  }
+
+  return {
+    createProfessor,
+    getProfessors,
+    updateProfessor,
+    deleteProfessor
+  };
+})(); //cai
 
 // --- LOGOUT FUNCTIONALITY ---
 
@@ -154,11 +228,13 @@ if (loginForm) {
     // let redirectPath = "/";
 
     switch (userType) {
+
       case "admin":
         loginUrl = `${API_BASE_URL}${ADMIN_LOGIN_ENDPOINT}`;
-        redirectPath =
-          "../../../attendance-tracking/modules/Admin/admin-dashboard.html";
+        redirectPath = "../../../super-admin/pages/super-admin-dashboard.html";
         break;
+
+
       case "student":
         loginUrl = `${API_BASE_URL}${STUDENT_LOGIN_ENDPOINT}`;
         redirectPath = "../../../attendance-tracking/modules/Student/student-dashboard.html";
@@ -171,6 +247,11 @@ if (loginForm) {
         loginUrl = `${API_BASE_URL}${PARENT_LOGIN_ENDPOINT}`;
         redirectPath = "/parent-dashboard.html";
         break;
+     // case "super-admin":
+    //loginUrl = `${API_BASE_URL}${ADMIN_LOGIN_ENDPOINT}`; 
+    //redirectPath =
+    //  "../../../attendance-tracking/modules/SuperAdmin/super-admin-dashboard.html";
+    //break;
       default:
         alert("Invalid user type selected.");
         return;
@@ -193,6 +274,7 @@ if (loginForm) {
       if (response.data && response.data.token) {
         // script.js, bandang line 195 (sa loob ng try block)
         const user = new AuthModel(response.data.user);
+        
 
         localStorage.setItem("authToken", response.data.token);
         localStorage.setItem("currentUser", JSON.stringify(user));
@@ -206,6 +288,8 @@ if (loginForm) {
         // alert(`Login successful! Redirecting to ${userType} portal...`);
         checkLoginStatus();
 
+        
+
         // 3. Redirect to the determined dashboard path
         window.location.href = redirectPath;
       } else {
@@ -216,7 +300,7 @@ if (loginForm) {
     } catch (error) {
       console.error("Login Failed Error:", error);
 
-      let errorMessage = "Login failed. Please check your ID and password.";
+      let errorMessage = "Login failed. Please check yo ur ID and password.";
 
       if (error.response) {
         if (error.response.status === 401 || error.response.status === 404) {
@@ -236,6 +320,98 @@ if (loginForm) {
     }
   });
 }
+
+//cai
+document.addEventListener("DOMContentLoaded", () => {
+
+  // --- Elements for Create Professor Modal ---
+  const createProfessorModal = document.getElementById("createProfessorModal");
+  const openCreateProfessorBtn = document.getElementById("openCreateProfessorModal");
+  const closeCreateProfessorModal = document.getElementById("closeCreateProfessorModal");
+  const createProfessorForm = document.getElementById("createProfessorForm");
+  const professorTableBody = document.getElementById("professorTableBody");
+
+  // --- Open Modal ---
+  openCreateProfessorBtn?.addEventListener("click", () => {
+    createProfessorModal.style.display = "block";
+    document.body.style.overflow = "hidden";
+  });
+
+  // --- Close Modal ---
+  closeCreateProfessorModal?.addEventListener("click", () => {
+    createProfessorModal.style.display = "none";
+    document.body.style.overflow = "auto";
+  });
+
+  // --- Close Modal on Outside Click ---
+  window.addEventListener("click", (e) => {
+    if (e.target === createProfessorModal) {
+      createProfessorModal.style.display = "none";
+      document.body.style.overflow = "auto";
+    }
+  });
+
+ 
+  createProfessorForm?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const newProfData = {
+      name: document.getElementById("profName").value,
+      email: document.getElementById("profEmail").value,
+      mobile_number: document.getElementById("profMobile").value,
+      username: document.getElementById("profUsername").value,
+      password: document.getElementById("profPassword").value,
+      department_id: parseInt(document.getElementById("profDept").value),
+      user_role_id: parseInt(document.getElementById("profRole").value)
+    };
+    const result = await SuperAdmin.createProfessor(newProfData);
+    if (result) {
+      createProfessorModal.style.display = "none";
+      createProfessorForm.reset();
+      document.body.style.overflow = "auto";
+      loadProfessorTable(); //
+    }
+  });
+
+  // --- Load Professors into Table ---
+  async function loadProfessorTable() {
+    if (!professorTableBody) return;
+    const professors = await SuperAdmin.getProfessors();
+    professorTableBody.innerHTML = "";
+    professors.forEach((prof) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${prof.id}</td>
+        <td>${prof.name}</td>
+        <td>${prof.email}</td>
+        <td>${prof.mobile_number}</td>
+        <td>${prof.username}</td>
+        <td>${prof.department_id}</td>
+        <td>${prof.user_role_id}</td>
+        <td>
+          <button class="edit-btn" data-id="${prof.id}">Edit</button>
+          <button class="delete-btn" data-id="${prof.id}">Delete</button>
+        </td>
+      `;
+      professorTableBody.appendChild(row);
+    });
+
+
+    professorTableBody.querySelectorAll(".delete-btn").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const profId = btn.getAttribute("data-id");
+        if (confirm("Are you sure you want to delete this professor?")) {
+          await SuperAdmin.deleteProfessor(profId);
+          loadProfessorTable();
+        }
+      });
+    });
+
+
+  }
+
+  // --- Initial Table Load ---
+  loadProfessorTable();
+});
 
 // Mobile Navigation
 if (hamburger && navLinks) {
@@ -356,3 +532,5 @@ document.querySelectorAll(".feature-card").forEach((card) => {
 
 // Initial check when the page loads
 document.addEventListener("DOMContentLoaded", checkLoginStatus);
+
+

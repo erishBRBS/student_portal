@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Super Admin - User Management</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Shared CSS -->
+  <link rel="stylesheet" href="/shared/css/variables.css">
+  <link rel="stylesheet" href="/shared/css/base.css">
+  <link rel="stylesheet" href="/shared/css/layout.css">
+  <link rel="stylesheet" href="/shared/css/components.css">
+  <link rel="stylesheet" href="/shared/css/utilities.css">
+  
+  <!-- Admin Specific CSS -->
+  <link rel="stylesheet" href="modules/css/attendance-tracking-management.css">
+  <link rel="stylesheet" href="css/admin-user-management.css">
+</head>
+<body>
+  <!-- Modern Alert Container -->
+  <div id="alertContainer" class="alert-container"></div>
+
+  <!-- Sidebar -->
+  <div id="sidebar-container"></div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Header -->
+    <div class="header">
+      <button class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+      </button>
+      
+      <div class="page-title">
+        <h1>Attendance Tracking - User Management</h1>
+        <p id="todayDate">Monday, September 11, 2023</p>
+      </div>
+      
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <i class="fas fa-moon"></i>
+        </button>
+        
+        <div class="notification-btn">
+          <i class="fas fa-bell"></i>
+          <span class="notification-badge">3</span>
+        </div>
+        
+        <div class="admin-profile">
+          <div class="admin-avatar">SU</div>
+          <div>Super Admin User</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard">
+      <!-- Register New Admin -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <i class="fas fa-user-plus"></i> Register New Admin
+          </div>
+        </div>
+        
+        <form class="form-grid" id="adminForm">
+          <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" class="form-control" placeholder="Enter full name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" class="form-control" placeholder="Enter email address" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="mobile">Mobile Number</label>
+            <input type="tel" id="mobile" class="form-control" placeholder="+63 912 345 6789">
+          </div>
+          
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" class="form-control" placeholder="Enter username" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" class="form-control" placeholder="Enter password" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="role">Role</label>
+            <select id="role" class="form-control" required>
+              <option value="">Select Role</option>
+              <option value="Super Admin">Super Admin</option>
+              <option value="Moderator">Moderator</option>
+              <option value="Viewer">Viewer</option>
+            </select>
+          </div>
+          
+          <div class="form-group" style="grid-column: 1 / -1;">
+            <label for="profilePic">Profile Picture</label>
+            <input type="file" id="profilePic" class="form-control" accept="image/*">
+            <div class="profile-picture">
+              <img src="https://via.placeholder.com/120" alt="Profile Preview" class="profile-img" id="profilePreview">
+              <label for="profilePic" class="profile-overlay">
+                <i class="fas fa-camera"></i>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group" style="grid-column: 1 / -1; display: flex; justify-content: flex-end;">
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-user-plus"></i> Create Admin Account
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Professor Management Section -->
+<div class="professor-section">
+  <!-- Register New Professor -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">
+        <i class="fas fa-chalkboard-teacher"></i> Register New Professor
+      </div>
+    </div>
+    
+    <!--cai-->
+    <form class="form-grid" id="createProfessorForm">
+      <div class="form-group">
+        <label for="professorName">Full Name</label>
+        <input type="text" id="professorName" class="form-control" placeh 2older="Enter full name" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="professorEmail">Email Address</label>
+        <input type="email" id="professorEmail" class="form-control" placeholder="Enter email address" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="professorMobile">Mobile Number</label>
+        <input type="tel" id="professorMobile" class="form-control" placeholder="+63 912 345 6789">
+      </div>
+      
+      <div class="form-group">
+        <label for="professorUsername">Username</label>
+        <input type="text" id="professorUsername" class="form-control" placeholder="Enter username" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="professorPassword">Password</label>
+        <input type="password" id="professorPassword" class="form-control" placeholder="Enter password" required>
+      </div>
+      
+      <div class="form-group" style="grid-column: 1 / -1; display: flex; justify-content: flex-end;">
+        <button type="submit" class="btn btn-primary" id="submitProfessor">
+          <i class="fas fa-user-plus"></i> Create Professor
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Existing Professors -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">
+        <i class="fas fa-users"></i> Existing Professors
+      </div>
+    </div>
+    
+    <div class="table-container">
+      <table id="professorTable">
+        <thead>
+          <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>Username</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="professorTableBody">
+          <!-- Rows will be populated by JS -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+      <!-- Existing Admins -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <i class="fas fa-users"></i> Existing Admins
+          </div>
+        </div>
+        
+        <div class="table-container">
+          <table id="adminTable">
+            <thead>
+              <tr>
+                <th>Profile</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Role</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><img src="https://via.placeholder.com/40" alt="Admin" class="profile-img" style="width: 40px; height: 40px;"></td>
+                <td>Juan Dela Cruz</td>
+                <td>juan.dela.cruz@university.edu</td>
+                <td>+63 912 345 6789</td>
+                <td><span class="role-badge role-super">Super Admin</span></td>
+                <td class="action-cell">
+                  <button class="action-btn edit-btn" data-id="0" data-type="admin"><i class="fas fa-edit"></i></button>
+                  <button class="action-btn delete-btn" data-id="0" data-type="admin"><i class="fas fa-trash"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td><img src="https://via.placeholder.com/40" alt="Admin" class="profile-img" style="width: 40px; height: 40px;"></td>
+                <td>Maria Santos</td>
+                <td>maria.santos@university.edu</td>
+                <td>+63 917 890 1234</td>
+                <td><span class="role-badge role-moderator">Moderator</span></td>
+                <td class="action-cell">
+                  <button class="action-btn edit-btn" data-id="1" data-type="admin"><i class="fas fa-edit"></i></button>
+                  <button class="action-btn delete-btn" data-id="1" data-type="admin"><i class="fas fa-trash"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td><img src="https://via.placeholder.com/40" alt="Admin" class="profile-img" style="width: 40px; height: 40px;"></td>
+                <td>Robert Lim</td>
+                <td>robert.lim@university.edu</td>
+                <td>+63 918 567 4321</td>
+                <td><span class="role-badge role-viewer">Viewer</span></td>
+                <td class="action-cell">
+                  <button class="action-btn edit-btn" data-id="2" data-type="admin"><i class="fas fa-edit"></i></button>
+                  <button class="action-btn delete-btn" data-id="2" data-type="admin"><i class="fas fa-trash"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Teacher Management Section -->
+      <div class="teacher-section">
+        <!-- Register New Teacher -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <i class="fas fa-chalkboard-teacher"></i> Register New Teacher
+            </div>
+          </div>
+          
+          <form class="form-grid" id="teacherForm">
+            <div class="form-group">
+              <label for="teacherFullName">Full Name</label>
+              <input type="text" id="teacherFullName" class="form-control" placeholder="Enter full name" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="teacherEmail">Email Address</label>
+              <input type="email" id="teacherEmail" class="form-control" placeholder="Enter email address" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="teacherMobile">Mobile Number</label>
+              <input type="tel" id="teacherMobile" class="form-control" placeholder="+63 912 345 6789">
+            </div>
+            
+            <div class="form-group">
+              <label for="teacherUsername">Username</label>
+              <input type="text" id="teacherUsername" class="form-control" placeholder="Enter username" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="teacherPassword">Password</label>
+              <input type="password" id="teacherPassword" class="form-control" placeholder="Enter password" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="teacherDepartment">Department</label>
+              <select id="teacherDepartment" class="form-control">
+                <option value="">Select Department</option>
+                <option value="2-yr. Associate in Computer Technology">2-yr. Associate in Computer Technology</option>
+                <option value="ABM">ABM</option>
+                <option value="BS Business Administration">BS Business Administration</option>
+                <option value="BS Computer Science">BS Computer Science</option>
+                <option value="BS Information Technology">BS Information Technology</option>
+                <option value="BS Psychology">BS Psychology</option>
+                <option value="BS Tourism Management">BS Tourism Management</option>
+                <option value="Humms">Humms</option>
+                <option value="IT in Mobile App and Web Development">IT in Mobile App and Web Development</option>
+                <option value="Stem">Stem</option>
+                <option value="Tourism operations">Tourism operations</option>
+              </select>
+            </div>
+            
+            <div class="form-group" style="grid-column: 1 / -1;">
+              <label for="teacherProfilePic">Profile Picture</label>
+              <input type="file" id="teacherProfilePic" class="form-control" accept="image/*">
+              <div class="profile-picture">
+                <img src="https://via.placeholder.com/120" alt="Profile Preview" class="profile-img" id="teacherProfilePreview">
+                <label for="teacherProfilePic" class="profile-overlay">
+                  <i class="fas fa-camera"></i>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group" style="grid-column: 1 / -1; display: flex; justify-content: flex-end;">
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-user-plus"></i> Create Teacher Account
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Existing Teachers -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">
+              <i class="fas fa-chalkboard-teacher"></i> Existing Teachers
+            </div>
+          </div>
+          
+          <div class="table-container">
+            <table id="teacherTable">
+              <thead>
+                <tr>
+                  <th>Profile</th>
+                  <th>Full Name</th>
+                  <th>Email</th>
+                  <th>Mobile</th>
+                  <th>Department</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><img src="https://via.placeholder.com/40" alt="Teacher" class="profile-img" style="width: 40px; height: 40px;"></td>
+                  <td>Dr. Ana Reyes</td>
+                  <td>ana.reyes@university.edu</td>
+                  <td>+63 912 345 6789</td>
+                  <td><span class="department-badge department-it">BS Information Technology</span></td>
+                  <td><span class="status-badge status-active">Active</span></td>
+                  <td class="action-cell">
+                    <button class="action-btn edit-btn" data-id="0" data-type="teacher"><i class="fas fa-edit"></i></button>
+                    <button class="action-btn delete-btn" data-id="0" data-type="teacher"><i class="fas fa-trash"></i></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><img src="https://via.placeholder.com/40" alt="Teacher" class="profile-img" style="width: 40px; height: 40px;"></td>
+                  <td>Prof. Carlos Garcia</td>
+                  <td>carlos.garcia@university.edu</td>
+                  <td>+63 917 890 1234</td>
+                  <td><span class="department-badge department-engineering">BS Tourism Management</span></td>
+                  <td><span class="status-badge status-active">Active</span></td>
+                  <td class="action-cell">
+                    <button class="action-btn edit-btn" data-id="1" data-type="teacher"><i class="fas fa-edit"></i></button>
+                    <button class="action-btn delete-btn" data-id="1" data-type="teacher"><i class="fas fa-trash"></i></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><img src="https://via.placeholder.com/40" alt="Teacher" class="profile-img" style="width: 40px; height: 40px;"></td>
+                  <td>Dr. Sofia Martinez</td>
+                  <td>sofia.martinez@university.edu</td>
+                  <td>+63 918 567 4321</td>
+                  <td><span class="department-badge department-business">BS Business Administration</span></td>
+                  <td><span class="status-badge status-inactive">Inactive</span></td>
+                  <td class="action-cell">
+                    <button class="action-btn edit-btn" data-id="2" data-type="teacher"><i class="fas fa-edit"></i></button>
+                    <button class="action-btn delete-btn" data-id="2" data-type="teacher"><i class="fas fa-trash"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Admin Modal -->
+  <div class="modal" id="editModal">
+    <div class="modal-content">
+      <button class="modal-close" id="closeAdminModal">
+        <i class="fas fa-times"></i>
+      </button>
+      
+      <div class="modal-header">
+        <h2 class="modal-title">Edit Admin</h2>
+      </div>
+      
+      <form class="form-grid" id="editForm">
+        <input type="hidden" id="editId">
+        
+        <div class="form-group">
+          <label for="editName">Full Name</label>
+          <input type="text" id="editName" class="form-control">
+        </div>
+        
+        <div class="form-group">
+          <label for="editEmail">Email Address</label>
+          <input type="email" id="editEmail" class="form-control">
+        </div>
+        
+        <div class="form-group">
+          <label for="editMobile">Mobile Number</label>
+          <input type="tel" id="editMobile" class="form-control">
+        </div>
+        
+        <div class="form-group">
+          <label for="editRole">Role</label>
+          <select id="editRole" class="form-control">
+            <option value="Super Admin">Super Admin</option>
+            <option value="Moderator">Moderator</option>
+            <option value="Viewer">Viewer</option>
+          </select>
+        </div>
+        
+        <div class="form-group" style="grid-column: 1 / -1;">
+          <label for="editProfilePic">Update Profile Picture</label>
+          <input type="file" id="editProfilePic" class="form-control" accept="image/*">
+          <div class="profile-picture">
+            <img src="https://via.placeholder.com/120" alt="Profile Preview" class="profile-img" id="editProfilePreview">
+            <label for="editProfilePic" class="profile-overlay">
+              <i class="fas fa-camera"></i>
+            </label>
+          </div>
+        </div>
+        
+        <div class="form-group" style="grid-column: 1 / -1; display: flex; justify-content: flex-end; gap: 10px;">
+          <button type="button" class="btn btn-secondary" id="cancelAdminEdit">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Edit Teacher Modal -->
+  <div class="modal" id="editTeacherModal">
+    <div class="modal-content">
+      <button class="modal-close" id="closeTeacherModal">
+        <i class="fas fa-times"></i>
+      </button>
+      
+      <div class="modal-header">
+        <h2 class="modal-title">Edit Teacher</h2>
+      </div>
+      
+      <form class="form-grid" id="editTeacherForm">
+        <input type="hidden" id="editTeacherId">
+        
+        <div class="form-group">
+          <label for="editTeacherName">Full Name</label>
+          <input type="text" id="editTeacherName" class="form-control">
+        </div>
+        
+        <div class="form-group">
+          <label for="editTeacherEmail">Email Address</label>
+          <input type="email" id="editTeacherEmail" class="form-control">
+        </div>
+        
+        <div class="form-group">
+          <label for="editTeacherMobile">Mobile Number</label>
+          <input type="tel" id="editTeacherMobile" class="form-control">
+        </div>
+        
+        <div class="form-group">
+          <label for="editTeacherUsername">Username</label>
+          <input type="text" id="editTeacherUsername" class="form-control">
+        </div>
+        
+        <div class="form-group">
+          <label for="editTeacherDepartment">Department</label>
+          <select id="editTeacherDepartment" class="form-control">
+            <option value="">Select Department</option>
+            <option value="2-yr. Associate in Computer Technology">2-yr. Associate in Computer Technology</option>
+            <option value="ABM">ABM</option>
+            <option value="BS Business Administration">BS Business Administration</option>
+            <option value="BS Computer Science">BS Computer Science</option>
+            <option value="BS Information Technology">BS Information Technology</option>
+            <option value="BS Psychology">BS Psychology</option>
+            <option value="BS Tourism Management">BS Tourism Management</option>
+            <option value="Humms">Humms</option>
+            <option value="IT in Mobile App and Web Development">IT in Mobile App and Web Development</option>
+            <option value="Stem">Stem</option>
+            <option value="Tourism operations">Tourism operations</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="editTeacherStatus">Status</label>
+          <select id="editTeacherStatus" class="form-control">
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+          </select>
+        </div>
+        
+        <div class="form-group" style="grid-column: 1 / -1;">
+          <label for="editTeacherProfilePic">Update Profile Picture</label>
+          <input type="file" id="editTeacherProfilePic" class="form-control" accept="image/*">
+          <div class="profile-picture">
+            <img src="https://via.placeholder.com/120" alt="Profile Preview" class="profile-img" id="editTeacherProfilePreview">
+            <label for="editTeacherProfilePic" class="profile-overlay">
+              <i class="fas fa-camera"></i>
+            </label>
+          </div>
+        </div>
+        
+        <div class="form-group" style="grid-column: 1 / -1; display: flex; justify-content: flex-end; gap: 10px;">
+          <button type="button" class="btn btn-secondary" id="cancelTeacherEdit">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div class="modal" id="deleteModal">
+    <div class="modal-content">
+      <button class="modal-close" id="closeDeleteModal">
+        <i class="fas fa-times"></i>
+      </button>
+      
+      <div class="modal-header">
+        <h2 class="modal-title">Confirm Deletion</h2>
+      </div>
+      
+      <div class="modal-body">
+        <p id="deleteMessage">Are you sure you want to delete this user?</p>
+      </div>
+      
+      <div class="form-group" style="display: flex; justify-content: flex-end; gap: 10px;">
+        <button type="button" class="btn btn-secondary" id="cancelDelete">Cancel</button>
+        <button type="button" class="btn btn-danger" id="confirmDelete">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shared JavaScript -->
+  <script src="/shared/js/utils.js"></script>
+  <script src="/shared/js/theme.js"></script>
+  <script src="/shared/js/sidebar.js"></script>
+  
+  <!-- Admin Specific JavaScript -->
+  <script src="modules/js/attendance-tracking-management.js"></script>
+  <script src="js/admin-user-management.js"></script>
+
+  <script type="module">
+    import { renderSidebar } from "../../../assets/js/components/sidebar/sidebar.component.js";
+    renderSidebar("attendance-tracking-management");
+  </script>
+</body>
+</html>

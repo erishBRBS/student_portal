@@ -611,17 +611,17 @@
             <span class="custom-checkbox"></span>
             <span class="checkbox-label">Remember me</span>
           </label>
-
-          <button type="submit" class="login-submit-btn">
+          <!--Added-->
+          <button type="submit" class="login-submit-btn" id="submit-btn-gps">
             <span class="login-text">Login to Portal</span>
             <span class="loading-spinner" aria-hidden="true"></span>
           </button>
 
-          <button type="submit" class="login-submit-btn">
+          <button type="submit" class="login-submit-btn" id="submit-btn-ats">
             <span class="login-text">Login to Attendance</span>
             <span class="loading-spinner" aria-hidden="true"></span>
           </button>
-
+          
           <div class="forgot-password">
             <a href="#">Forgot your password?</a>
           </div>
@@ -645,5 +645,7 @@
     </script>
     <script src="/assets/model/auth-model.js"></script>
     <script src="/landing-page/Modules/js/script.js"></script>
+    <script src="../../scripts/api.js"></script> <!-- ADDED -->
+    <script src="../../scripts/admin.js"></script> 
   </body>
 </html>

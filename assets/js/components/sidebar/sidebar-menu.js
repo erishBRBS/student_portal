@@ -29,3 +29,13 @@ export const TeacherMenu = [
   { label: "Settings", icon: "fas fa-cog", link: "Teacher/teacher-settings" },
   { label: "Logout", icon: "fas fa-sign-out-alt", link: "Teacher/logout" }
 ];
+
+export const ParentMenu = [
+  { label: "Dashboard", icon: "fas fa-home", link: "Parent/parent-dashboard" },
+  { label: "Gate Attendance", icon: "fas fa-calendar-check", link: "Parent/parent-gate-attendance" },
+  { label: "Subject Attendance", icon: "fas fa-calendar-check", link: "Parent/parent-subj-attendance" },
+  { label: "Announcements", icon: "fas fa-user-cog", link: "Parent/parents-announcements" },
+  { label: "Schedule", icon: "fas fa-clock", link: "Parent/parent-schedule" },
+  { label: "Settings", icon: "fas fa-cog", link: "Parent/parent-settings" },
+  { label: "Logout", icon: "fas fa-sign-out-alt", link: "Parent/logout" }
+];

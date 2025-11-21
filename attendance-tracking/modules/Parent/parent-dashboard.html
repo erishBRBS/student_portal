@@ -11,51 +11,7 @@
 </head>
 <body>
   <!-- Sidebar -->
-  <div class="sidebar">
-    <div class="logo-container">
-      <div class="logo">STI</div>
-      <div class="logo-text">STI Bacoor</div>
-    </div>
-    
-    <div class="user-info">
-      <div class="user-avatar">MC</div>
-      <div class="user-details">
-        <div class="user-name">Maria Dela Cruz</div>
-        <div class="user-role">Parent</div>
-      </div>
-    </div>
-    
-    <div class="nav-menu">
-      <a href="parent-dashboard.html" class="nav-item active">
-        <i class="fas fa-home"></i>
-        <span>Dashboard</span>
-      </a>
-      <a href="parent-gate-attendance.html" class="nav-item">
-        <i class="fas fa-door-open"></i>
-        <span>Gate Attendance</span>
-      </a>
-      <a href="parent-subject-attendance.html" class="nav-item">
-        <i class="fas fa-calendar-check"></i>
-        <span>Subject Attendance</span>
-      </a>
-      <a href="parent-schedule.html" class="nav-item">
-        <i class="fas fa-clock"></i>
-        <span>Schedule</span>
-      </a>
-      <a href="parent-announcements.html" class="nav-item">
-        <i class="fas fa-bullhorn"></i>
-        <span>Announcements</span>
-      </a>
-      <a href="parent-settings.html" class="nav-item">
-        <i class="fas fa-cog"></i>
-        <span>Settings</span>
-      </a>
-      <a href="login.html" class="nav-item">
-        <i class="fas fa-sign-out-alt"></i>
-        <span>Logout</span>
-      </a>
-    </div>
-  </div>
+ <div id="sidebar-container"></div>
 
   <!-- Main Content -->
   <div class="main-content">
@@ -529,5 +485,9 @@
 
   <!-- Parent Dashboard JS -->
   <script src="modules/js/parent-dashboard.js"></script>
+ <script type="module">
+   import { renderSidebar } from "../../../assets/js/components/sidebar/sidebar.component.js";
+    renderSidebar("parent-dasboard");
+  </script>
 </body>
 </html>
